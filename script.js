@@ -6,18 +6,34 @@ function gameBoard() {
     ];
 
     playerSelection(board);
-
+    win(board);
 
 }
 
+gameBoard();
+
 function playerSelection(gBoard) {
-    gboard[1][1] = 1;
+    gBoard[1][1] = 1;
     gBoard[1][2] = 2;
-    gBoard[0][1] = 1;
+    gBoard[0][0] = 1;
     gBoard[2][0] = 2;
+    gBoard[2][2] = 1;
 }
 
 function win(gBoard) {
     //write 2d for loop checking for every possible line:
-    if(gboard[0][0])
+    const winCases = {
+         winCase1 : gBoard[0][0] === 1 && gBoard[1][0] === 1 && gBoard[2][0] === 1,
+         winCase2 : gBoard[0][1] === 1 && gBoard[1][1] === 1 && gBoard[2][1] === 1,
+         winCase3 : gBoard[0][2] === 1 && gBoard[1][2] === 1 && gBoard[2][2] === 1,
+         winCase4 : gBoard[0][0] === 1 && gBoard[0][1] === 1 && gBoard[0][2] === 1,
+         winCase5 : gBoard[1][0] === 1 && gBoard[1][1] === 1 && gBoard[1][2] === 1,
+         winCase6 : gBoard[2][0] === 1 && gBoard[2][1] === 1 && gBoard[2][2] === 1,
+         winCase7 : gBoard[0][0] === 1 && gBoard[1][1] === 1 && gBoard[2][2] === 1,
+         winCase8 : gBoard[0][2] === 1 && gBoard[1][1] === 1 && gBoard[2][0] === 1,
+    };
+
+    for(const winCase in winCases) {
+        if (winCases[winCase] === true) console.log('winner!');
+    }
 }
