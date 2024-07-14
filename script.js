@@ -1,7 +1,7 @@
 function ticTacToe() {
 
     // Game board and player functions
-    function gameBoard() {
+    const gameBoard = (function() {
         let board = [];
         let incrementor = 0;
         for (let i = 0; i < 3; i++) {
@@ -13,9 +13,9 @@ function ticTacToe() {
 
         let newBoard = () => board;
         return {newBoard};
-    };
+    })();
 
-    function players() {
+    const players = (function() {
         const X = {
             name: 'x',
             score: 0
@@ -30,20 +30,24 @@ function ticTacToe() {
         let playerO = () => O;
 
         return {playerX, playerO}
-    };
+    })();
 
     // Game flow functions
     function takeTurns(cGame) {
         let playerXInputRow = prompt(`X: Row?`);
-        let playerXInputColumn = prompt(`Y: Column?`);
-        cGame.board[playerXInputRow][playerXInputColumn] = 'X';
+        let playerXInputColumn = prompt(`X: Column?`);
+        cGame[playerXInputRow][playerXInputColumn] = cGame[playerXInputRow][playerXInputColumn]+'X';
 
-        let playerOInputRow = prompt(`X: Row?`);
-        let playerOInputColumn = prompt(`Y: Column?`);
-        cGame.board[playerOInputRow][playerOInputColumn] = 'O';
+        let playerOInputRow = prompt(`O: Row?`);
+        let playerOInputColumn = prompt(`O: Column?`);
+        cGame[playerOInputRow][playerOInputColumn] = cGame[playerOInputRow][playerOInputColumn]+'O';
+
+        console.log(cGame);
     };
 
-    function winOrDrawCheck (gBoard) {
+    takeTurns(gameBoard.newBoard());
+
+    function winCheck (gBoard) {
         const winningConditions = [
             [0, 1, 2], // First row
             [3, 4, 5], // Second row
