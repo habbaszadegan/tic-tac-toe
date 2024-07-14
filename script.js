@@ -47,7 +47,7 @@ function ticTacToe() {
 
     takeTurns(gameBoard.newBoard());
 
-    function winCheck (gBoard) {
+    function winCheck (gBoard, playerSymbol) {
         const winningConditions = [
             [0, 1, 2], // First row
             [3, 4, 5], // Second row
@@ -59,13 +59,15 @@ function ticTacToe() {
             [2, 4, 6], // Second diagonal
         ];
 
-        let oCheck = [];
-        let xCheck = [];
-
-        // for (let i = 0; i < winningConditions.length; i++) {
-        //     let 
-        //     if ()
-        // }
+        for (let i = 0; i < winningConditions.length; i++) {
+            const condition = winningConditions[i];
+            if (gBoard[condition[0]] === playerSymbol &&
+                gBoard[condition[1]] === playerSymbol &&
+                gBoard[condition[2]] === playerSymbol) {
+              return true;
+                }
+            }
+        return false;
     }
 
     function game() { // This function is a mess and needs extensive reworking
