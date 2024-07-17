@@ -48,25 +48,19 @@ function ticTacToe() {
 
     function winCheck (gBoard, playerSymbol) {
         const winningConditions = [
-            [0, 1, 2], // First row
-            [3, 4, 5], // Second row
-            [6, 7, 8], // Third row
-            [0, 3, 6], // First column
-            [1, 4, 7], // Second column
-            [2, 5, 8], // Third column
-            [0, 4, 8], // First diagonal
-            [2, 4, 6], // Second diagonal
+            [[0, 0], [0, 1], [0, 2]], // First row
+            [[1, 0], [1, 1], [1, 2]], // Second row
+            [[2, 0], [2, 1], [2, 2]], // Third row
+            [[0, 0], [1, 0], [2, 0]], // First column
+            [[0, 1], [1, 1], [2, 1]], // Second column
+            [[0, 2], [1, 2], [2, 2]], // Third column
+            [[0, 0], [1, 1], [2, 2]], // First diagonal
+            [[0, 2], [1, 1], [2, 0]], // Second diagonal
         ];
 
-        for (let i = 0; i < winningConditions.length; i++) {
-            const condition = winningConditions[i];
-            if (gBoard[condition[0]] === playerSymbol &&
-                gBoard[condition[1]] === playerSymbol &&
-                gBoard[condition[2]] === playerSymbol) {
-              return true;
-                }
-            }
-        return false;
+        for (let condition of winningConditions) {
+            if (condition.every())
+        }
     }
 
     function game() { // This function is a mess and needs extensive reworking
