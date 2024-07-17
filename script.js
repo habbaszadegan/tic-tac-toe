@@ -3,11 +3,10 @@ function ticTacToe() {
     // Game board and player functions
     const gameBoard = (function() {
         let board = [];
-        let incrementor = 0;
         for (let i = 0; i < 3; i++) {
             board[i] = [];
             for (let j = 0; j < 3; j++) {
-                board[i][j] = incrementor++;
+                board[i][j] = null;
             }
         }
 
@@ -36,16 +35,16 @@ function ticTacToe() {
     function takeTurns(cGame) {
         let playerXInputRow = prompt(`X: Row?`);
         let playerXInputColumn = prompt(`X: Column?`);
-        cGame[playerXInputRow][playerXInputColumn] = cGame[playerXInputRow][playerXInputColumn]+'X';
+        cGame[playerXInputRow][playerXInputColumn] = 'X';
 
         let playerOInputRow = prompt(`O: Row?`);
         let playerOInputColumn = prompt(`O: Column?`);
-        cGame[playerOInputRow][playerOInputColumn] = cGame[playerOInputRow][playerOInputColumn]+'O';
+        cGame[playerOInputRow][playerOInputColumn] = 'O';
 
         console.log(cGame);
     };
 
-    takeTurns(gameBoard.newBoard());
+    takeTurns(gameBoard.newBoard())
 
     function winCheck (gBoard, playerSymbol) {
         const winningConditions = [
