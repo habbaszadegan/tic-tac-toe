@@ -16,12 +16,12 @@ function ticTacToe() {
 
     const players = (function() {
         const X = {
-            name: 'x',
+            name: 'X',
             score: 0
         }
     
         const O = {
-            name: 'o',
+            name: 'O',
             score: 0
         }
 
@@ -44,8 +44,6 @@ function ticTacToe() {
         console.log(cGame);
     };
 
-    takeTurns(gameBoard.newBoard())
-
     function winCheck (gBoard, playerSymbol) {
         const winningConditions = [
             [[0, 0], [0, 1], [0, 2]], // First row
@@ -67,19 +65,36 @@ function ticTacToe() {
         return false;
     }
 
-    function game() { // This function is a mess and needs extensive reworking
-        let currentGame = gameBoard.board;
-        console.log(currentGame);
-        let currentPlayers = players();
-        takeTurns(currentGame);
+    function oneRound(turns, playrs, winDrwChk) {
+        // draw the gameboard
+            // take turns inputting your token on the board
+            // check win condition
+            // update score
 
-        function oneRound(turns, playrs, winDrwChk) {
-            // draw the gameboard
-                // choose your token
-                // take turns inputting your token on the board
-                // check win condition
-                // update score
+        const newGameBoard = gameBoard.newBoard();
+        const X = players.playerX();
+        const O = players.playerO();
+        turns(newGameBoard);
+        if (winDrwChk(newGameBoard, X.name)) {
+            console.log(`X wins!`);
+            X.score++;
+            console.log(X.score);
+            return;
+        } else if (winDrwChk(newGameBoard, O.name)) {
+            console.log(`O wins!`);
+            O.score++;
+            console.log(O.score);
+            return;
         }
+
+    }
+
+    oneRound(takeTurns);
+
+
+
+    function game() { // 
+      
     }    
 };
 
