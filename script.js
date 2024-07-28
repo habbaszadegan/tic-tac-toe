@@ -65,39 +65,41 @@ function ticTacToe() {
         return false;
     }
 
-    function oneRound(winDrwChk) {
-        // draw the gameboard
-            // take turns inputting your token on the board
-            // check win condition
-            // update score
-
+    const oneRound = function () {
         const newGameBoard = gameBoard.newBoard();
         const X = players.playerX();
         const O = players.playerO();
 
-        while (winDrwChk(newGameBoard, X.name) === false && winDrwChk(newGameBoard, O.name) === false) {
+        while (winCheck(newGameBoard, X.name) === false && winCheck(newGameBoard, O.name) === false) {
             takeTurns(newGameBoard);
         }
         
-        if (winDrwChk(newGameBoard, X.name) === true) {
-            X.score++;
+        if (winCheck(newGameBoard, X.name) === true) {
+            let xScore = X.score++;
             console.log(`X wins! X: ${X.score} O: ${O.score}`);
-            return;
+            return {xScore};
         } else {
-            O.score++;
+            let oScore = O.score++;
             console.log(`O wins! X: ${X.score} O: ${O.score}`);
-            return;
+            return {oScore};
         }
     }
 
-    oneRound(winCheck);
+    oneRound();
 
+    function game() {
+        while (oneRound.xScore != 3 || oneRound.oScore != 3)
+            oneRound();
+        }
 
-
-    function game() { // 
-      
-    }    
+        if (oneRound.xScore == 3) {
+            console.log(`X wins the game!`);
+        } else {
+            console.log(`O wins the game!`);
+        }
 };
+
+game();
 
 ticTacToe();
 
