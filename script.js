@@ -59,8 +59,12 @@ function ticTacToe() {
         ];
 
         for (let condition of winningConditions) {
-            if (condition.every())
+            if (condition.every(coord => gBoard[coord[0]][coord[1]] === playerSymbol)) {
+                return true;
+            }
         }
+
+        return false;
     }
 
     function game() { // This function is a mess and needs extensive reworking
