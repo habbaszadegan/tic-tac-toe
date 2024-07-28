@@ -65,7 +65,7 @@ function ticTacToe() {
         return false;
     }
 
-    function oneRound(turns, playrs, winDrwChk) {
+    function oneRound(winDrwChk) {
         // draw the gameboard
             // take turns inputting your token on the board
             // check win condition
@@ -74,22 +74,23 @@ function ticTacToe() {
         const newGameBoard = gameBoard.newBoard();
         const X = players.playerX();
         const O = players.playerO();
-        turns(newGameBoard);
-        if (winDrwChk(newGameBoard, X.name)) {
-            console.log(`X wins!`);
+
+        while (winDrwChk(newGameBoard, X.name) === false && winDrwChk(newGameBoard, O.name) === false) {
+            takeTurns(newGameBoard);
+        }
+        
+        if (winDrwChk(newGameBoard, X.name) === true) {
             X.score++;
-            console.log(X.score);
+            console.log(`X wins! X: ${X.score} O: ${O.score}`);
             return;
-        } else if (winDrwChk(newGameBoard, O.name)) {
-            console.log(`O wins!`);
+        } else {
             O.score++;
-            console.log(O.score);
+            console.log(`O wins! X: ${X.score} O: ${O.score}`);
             return;
         }
-
     }
 
-    oneRound(takeTurns);
+    oneRound(winCheck);
 
 
 
