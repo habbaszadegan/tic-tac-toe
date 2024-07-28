@@ -9,7 +9,7 @@ function ticTacToe() {
                 board[i][j] = null;
             }
         }
-
+        
         let newBoard = () => board;
         return {newBoard};
     })();
@@ -83,12 +83,11 @@ function ticTacToe() {
             console.log(`O wins! X: ${X.score} O: ${O.score}`);
             return {oScore};
         }
+
     }
 
-    oneRound();
-
     function game() {
-        while (oneRound.xScore != 3 || oneRound.oScore != 3)
+        while (oneRound.xScore != 3 || oneRound.oScore != 3){
             oneRound();
         }
 
@@ -97,9 +96,10 @@ function ticTacToe() {
         } else {
             console.log(`O wins the game!`);
         }
+    }
+    
+    game();
 };
-
-game();
 
 ticTacToe();
 
