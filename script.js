@@ -12,8 +12,14 @@ function ticTacToe() {
         
         let newBoard = () => board;
 
-        let resetBoard = () => board;
-        
+        let resetBoard = () => {
+            for (let i = 0; i < 3; i++) {
+                for (let j = 0; j < 3; j++) {
+                    board[i][j] = null;
+                }
+            }
+        };
+
         return {newBoard, resetBoard};
     })();
 
@@ -75,32 +81,25 @@ function ticTacToe() {
 
         while (true) {
             takeTurns(newGameBoard);
-            if (X.score === 3 || O.score == 3) {
-                console.log(`Game over! X: ${X.score} O: ${O.score}`);
-                break;
-            } else if (winCheck(newGameBoard, X.name) === true) {
+            if (winCheck(newGameBoard, X.name) === true) {
                 let xScore = X.score++;
                 console.log(`X wins! X: ${X.score} O: ${O.score}`);
-                newGameBoard = gameBoard.resetBoard();
                 return {xScore};
             } else if (winCheck(newGameBoard, O.name) === true){
                 let oScore = O.score++;
                 console.log(`O wins! X: ${X.score} O: ${O.score}`);
-                newGameBoard = gameBoard.resetBoard();
                 return {oScore};
             }
         }
     }
 
     function game() {
-        while (oneRound.xScore != 3 || oneRound.oScore != 3){
+        while (true) {
             oneRound();
-        }
-
-        if (oneRound.xScore == 3) {
-            console.log(`X wins the game!`);
-        } else {
-            console.log(`O wins the game!`);
+            if (!confirm("Do you want to play another round?")) {
+                break;
+            }
+            gameBoard.resetBoard();
         }
     }
     
