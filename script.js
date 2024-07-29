@@ -11,7 +11,10 @@ function ticTacToe() {
         }
         
         let newBoard = () => board;
-        return {newBoard};
+
+        let resetBoard = () => board;
+        
+        return {newBoard, resetBoard};
     })();
 
     const players = (function() {
@@ -66,24 +69,27 @@ function ticTacToe() {
     }
 
     const oneRound = function () {
-        const newGameBoard = gameBoard.newBoard();
+        let newGameBoard = gameBoard.newBoard();
         const X = players.playerX();
         const O = players.playerO();
 
-        while (winCheck(newGameBoard, X.name) === false && winCheck(newGameBoard, O.name) === false) {
+        while (true) {
             takeTurns(newGameBoard);
+            if (X.score === 3 || O.score == 3) {
+                console.log(`Game over! X: ${X.score} O: ${O.score}`);
+                break;
+            } else if (winCheck(newGameBoard, X.name) === true) {
+                let xScore = X.score++;
+                console.log(`X wins! X: ${X.score} O: ${O.score}`);
+                newGameBoard = gameBoard.resetBoard();
+                return {xScore};
+            } else if (winCheck(newGameBoard, O.name) === true){
+                let oScore = O.score++;
+                console.log(`O wins! X: ${X.score} O: ${O.score}`);
+                newGameBoard = gameBoard.resetBoard();
+                return {oScore};
+            }
         }
-        
-        if (winCheck(newGameBoard, X.name) === true) {
-            let xScore = X.score++;
-            console.log(`X wins! X: ${X.score} O: ${O.score}`);
-            return {xScore};
-        } else {
-            let oScore = O.score++;
-            console.log(`O wins! X: ${X.score} O: ${O.score}`);
-            return {oScore};
-        }
-
     }
 
     function game() {
