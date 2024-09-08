@@ -41,24 +41,39 @@ function ticTacToe() {
     })();
 
     // Game flow functions
-    function takeTurns(cGame) {
-        let playerXInputRow = prompt(`X: Row?`);
-        let playerXInputColumn = prompt(`X: Column?`);
-        while(cGame[playerXInputRow][playerXInputColumn] != null) {
-            alert('Input full. Try again');
-            playerXInputRow = prompt(`X: Row?`);
-            playerXInputColumn = prompt(`X: Column?`);
+    // =======================>
+    function takeTurns(cGame, symbol) {
+        if (symbol == 'X') {
+            symbol = 'O';
+        } else {
+            symbol = "X";
         }
-        cGame[playerXInputRow][playerXInputColumn] = 'X';
+        let inputRow = prompt(`${symbol}: Row?`);
+        let inputColumn = prompt(`${symbol}: Column?`);
+        while(cGame[inputRow][inputColumn] != null) {
+            alert('Input full. Try again');
+            inputRow = prompt(`${symbol}: Row?`);
+            inputColumn = prompt(`${symbol}: Column?`);
+        }
+        cGame[inputRow][inputColumn] = `${symbol}`;
 
-        let playerOInputRow = prompt(`O: Row?`);
-        let playerOInputColumn = prompt(`O: Column?`);
-        while(cGame[playerOInputRow][playerOInputColumn] != null) {
-            alert('Input full. Try again');
-            playerOInputRow = prompt(`O: Row?`);
-            playerOInputColumn = prompt(`O: Column?`);
-        }
-        cGame[playerOInputRow][playerOInputColumn] = 'O';
+        // let playerXInputRow = prompt(`X: Row?`);
+        // let playerXInputColumn = prompt(`X: Column?`);
+        // while(cGame[playerXInputRow][playerXInputColumn] != null) {
+        //     alert('Input full. Try again');
+        //     playerXInputRow = prompt(`X: Row?`);
+        //     playerXInputColumn = prompt(`X: Column?`);
+        // }
+        // cGame[playerXInputRow][playerXInputColumn] = 'X';
+
+        // let playerOInputRow = prompt(`O: Row?`);
+        // let playerOInputColumn = prompt(`O: Column?`);
+        // while(cGame[playerOInputRow][playerOInputColumn] != null) {
+        //     alert('Input full. Try again');
+        //     playerOInputRow = prompt(`O: Row?`);
+        //     playerOInputColumn = prompt(`O: Column?`);
+        // }
+        // cGame[playerOInputRow][playerOInputColumn] = 'O';
 
         console.log(cGame);
     };
@@ -88,9 +103,11 @@ function ticTacToe() {
         let newGameBoard = gameBoard.newBoard();
         const X = players.playerX();
         const O = players.playerO();
+        // ============================>
+        let playerSymbol = 'X';
 
         while (true) {
-            takeTurns(newGameBoard);
+            takeTurns(newGameBoard, playerSymbol);
             if (winCheck(newGameBoard, X.name) === true) {
                 let xScore = X.score++;
                 console.log(`X wins! X: ${X.score} O: ${O.score}`);
