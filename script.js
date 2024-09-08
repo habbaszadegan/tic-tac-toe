@@ -44,10 +44,20 @@ function ticTacToe() {
     function takeTurns(cGame) {
         let playerXInputRow = prompt(`X: Row?`);
         let playerXInputColumn = prompt(`X: Column?`);
+        while(cGame[playerXInputRow][playerXInputColumn] != null) {
+            alert('Input full. Try again');
+            playerXInputRow = prompt(`X: Row?`);
+            playerXInputColumn = prompt(`X: Column?`);
+        }
         cGame[playerXInputRow][playerXInputColumn] = 'X';
 
         let playerOInputRow = prompt(`O: Row?`);
         let playerOInputColumn = prompt(`O: Column?`);
+        while(cGame[playerOInputRow][playerOInputColumn] != null) {
+            alert('Input full. Try again');
+            playerOInputRow = prompt(`O: Row?`);
+            playerOInputColumn = prompt(`O: Column?`);
+        }
         cGame[playerOInputRow][playerOInputColumn] = 'O';
 
         console.log(cGame);
@@ -104,6 +114,8 @@ function ticTacToe() {
     }
     
     game();
+
+    
 };
 
 ticTacToe();
@@ -114,6 +126,4 @@ ticTacToe();
 //      a. Create objects containing and updating player name, token input and score
 //      i. Should include: name (enter x or o), score
 // Update player selection on gameboard
-
-
 
